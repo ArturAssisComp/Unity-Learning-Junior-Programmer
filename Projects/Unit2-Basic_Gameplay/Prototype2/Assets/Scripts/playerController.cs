@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //Private attributes:
-    private float speed = 35f;
+    private float speed = 45f;
     private float horizontalInput;
-    private float leftBound = -20f, rightBound = 20f;
+    private float mid_point = 0f, range = 20f;
+
+    //Public attributes:
+    public GameObject food;
 
 
     // Start is called before the first frame update
@@ -27,9 +30,16 @@ public class playerController : MonoBehaviour
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
 
         //Make the player stay inbound:
-        if (transform.position.x < leftBound)
-            transform.position = new Vector3(leftBound, transform.position.y, transform.position.z);
-        else if (transform.position.x > rightBound)
-            transform.position = new Vector3(rightBound, transform.position.y, transform.position.z);
+        if (transform.position.x < mid_point - range)
+            transform.position = new Vector3(mid_point - range, transform.position.y, transform.position.z);
+        else if (transform.position.x > mid_point + range)
+            transform.position = new Vector3(mid_point + range, transform.position.y, transform.position.z);
+
+        //Get the input from space bar:
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Launch the projectile:
+            Instantiate(food, transform.position, food.transform.rotation);
+        }
     }
 }
