@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 7083509989820406635}
   - component: {fileID: 114801270109156022}
   - component: {fileID: 114154270959445812}
+  - component: {fileID: 65508366036071968}
+  - component: {fileID: 6447455836966521098}
+  - component: {fileID: 114555778927296532}
   m_Layer: 0
   m_Name: Food_Banana_01
   m_TagString: Untagged
@@ -102,5 +105,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93e06744b711c1d44a61181ea3d3d744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &65508366036071968
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069354568716823951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.506224, y: 0.4757379, z: 0.48445186}
+  m_Center: {x: 0, y: 0.009565256, z: 0.021385124}
+--- !u!54 &6447455836966521098
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069354568716823951}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &114555778927296532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069354568716823951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e557990bc29e442b4b9505244bff81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
