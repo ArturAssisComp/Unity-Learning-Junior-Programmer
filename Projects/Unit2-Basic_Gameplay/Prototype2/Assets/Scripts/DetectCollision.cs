@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DetectCollision : MonoBehaviour
 {
+    //Score:
+    public float scoreValue = 1f;
+    private GameObject owner;
+    private PlayerController ownerComponent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +24,21 @@ public class DetectCollision : MonoBehaviour
     //Override the method OnTrigger
     private void OnTriggerEnter(Collider other)
     {
-        //Destroy the object and the other.
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        if (other.gameObject != owner)
+        {
+            ownerComponent = owner.GetComponent<PlayerController>();
+
+            //Update the score:
+            ownerComponent.AddToScore(scoreValue);
+
+            //Destroy the object and the other.
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    public void setOwner (GameObject owner)
+    {
+        this.owner = owner;
     }
 }
