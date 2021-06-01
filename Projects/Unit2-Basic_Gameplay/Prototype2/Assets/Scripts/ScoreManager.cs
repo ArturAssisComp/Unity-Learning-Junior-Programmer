@@ -20,11 +20,13 @@ public class ScoreManager : MonoBehaviour
 
     void PrintStatus(GameObject player)
     {
+        //Get player component:
         PlayerController playerComponent;
         if (player != null)
             playerComponent = player.GetComponent<PlayerController>();
         else playerComponent = null;
 
+        //Print the status:
         if (playerComponent != null)
         {
             Debug.Log("Health: " + playerComponent.getHealth);

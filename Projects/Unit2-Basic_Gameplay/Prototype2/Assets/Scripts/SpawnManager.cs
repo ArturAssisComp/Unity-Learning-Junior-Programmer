@@ -28,23 +28,26 @@ public class SpawnManager : MonoBehaviour
         int enemyIndex;
         float randomPositionX = 0f, randomPositionZ = 0f;
         Vector3 spawnPosition;
+        GameObject clone;
         
 
         //Choose the enemy:
         enemyIndex     = Random.Range(0, enemies.Length);
         //enemies[enemyIndex].transform.rotation
+        clone = Instantiate(enemies[enemyIndex], Vector3.zero, enemies[enemyIndex].transform.rotation);
 
-        switch (Random.Range(0, 4))
+        switch (Random.Range(0, 4)) 
         {
+            //The enemy will be rotated suposing that its initial rotation is (0, 180, 0) in euler angles.
             case 0: //x == leftX - offset
                 randomPositionX = leftX - offset;
                 randomPositionZ = bottomZ + (upZ - bottomZ) * Random.value;
-                enemies[enemyIndex].transform.Rotate(Vector3.up, 90);
+                clone.transform.Rotate(Vector3.up, -90);
                 break;
             case 1: //x == rightX + offset
                 randomPositionX = rightX + offset;
                 randomPositionZ = bottomZ + (upZ - bottomZ) * Random.value;
-                enemies[enemyIndex].transform.Rotate(Vector3.up, -90);
+                clone.transform.Rotate(Vector3.up, 90);
                 break;
             case 2: //z == upZ + offset
                 randomPositionZ = upZ + offset;
@@ -54,7 +57,7 @@ public class SpawnManager : MonoBehaviour
             case 3: //z == bottomZ - offset
                 randomPositionZ = bottomZ - offset;
                 randomPositionX = leftX + (rightX - leftX) * Random.value;
-                enemies[enemyIndex].transform.Rotate(Vector3.up, 180);
+                clone.transform.Rotate(Vector3.up, 180);
                 break;
             default:
                 break;
@@ -63,7 +66,7 @@ public class SpawnManager : MonoBehaviour
         //Calculate the position:
         spawnPosition  = new Vector3(randomPositionX, 0, randomPositionZ);
 
-        //Instantiate the enemy:
-        Instantiate(enemies[enemyIndex], spawnPosition, enemies[enemyIndex].transform.rotation);
+        //Set the position of the enemy:
+        clone.transform.position = spawnPosition;
     }
 }

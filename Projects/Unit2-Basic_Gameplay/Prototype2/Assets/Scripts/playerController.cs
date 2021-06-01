@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        this.health = this.maxHealth;
     }
 
     // Update is called once per frame
@@ -44,35 +44,45 @@ public class PlayerController : MonoBehaviour
         }else
         {
             //Get the horizontal and vertical inputs [-1, +1]:
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            this.horizontalInput = Input.GetAxis("Horizontal");
+            this.verticalInput = Input.GetAxis("Vertical");
 
-            Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+            Vector3 direction = new Vector3(this.horizontalInput, 0, this.verticalInput);
             direction.Normalize();
 
-            //Move the player within the lateral/vertical bounds:
-            transform.Translate(direction * Time.deltaTime * speed);
-
-            //Make the player stay inbound:
-            if (transform.position.x < horizontalMidPoint - horizontalRange)
-                transform.position = new Vector3(horizontalMidPoint - horizontalRange, transform.position.y, transform.position.z);
-            else if (transform.position.x > horizontalMidPoint + horizontalRange)
-                transform.position = new Vector3(horizontalMidPoint + horizontalRange, transform.position.y, transform.position.z);
-
-            if (transform.position.z < verticalMidPoint - verticalRange)
-                transform.position = new Vector3(transform.position.x, transform.position.y, verticalMidPoint - verticalRange);
-            else if (transform.position.z > verticalMidPoint + verticalRange)
-                transform.position = new Vector3(transform.position.x, transform.position.y, verticalMidPoint + verticalRange);
+            MovePlayer(direction, this.speed, this.horizontalMidPoint, this.horizontalRange, this.verticalMidPoint, this.verticalRange);
 
             //Get the input from space bar:
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //Launch the projectile:
-                clone = Instantiate(food, transform.position, food.transform.rotation);
-                clone.GetComponent<DetectCollision>().setOwner(this.gameObject);
+                this.clone = Instantiate(this.food, this.transform.position, this.food.transform.rotation);
+                this.clone.GetComponent<DetectCollision>().setOwner(this.gameObject);
             }
         }
     }
+
+
+    void MovePlayer(Vector3 direction, float speed, float horizontalMidPoint, float horizontalRange, float verticalMidPoint, float verticalRange)
+    //Move the player in the direction given by 'direction' with speed given by 'speed' with the given constraints.
+    {
+            //Move the player within the lateral/vertical bounds:
+            this.transform.Translate(direction * Time.deltaTime * speed);
+
+            //Make the player stay inbound:
+            //Horizontal
+            if (this.transform.position.x < horizontalMidPoint - horizontalRange)
+                this.transform.position = new Vector3(horizontalMidPoint - horizontalRange, this.transform.position.y, this.transform.position.z);
+            else if (this.transform.position.x > horizontalMidPoint + horizontalRange)
+                this.transform.position = new Vector3(horizontalMidPoint + horizontalRange, this.transform.position.y, this.transform.position.z);
+
+            //Vertical
+            if (this.transform.position.z < verticalMidPoint - verticalRange)
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, verticalMidPoint - verticalRange);
+            else if (this.transform.position.z > verticalMidPoint + verticalRange)
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, verticalMidPoint + verticalRange);
+    }
+
 
     public void AddToScore(float amount)
     {

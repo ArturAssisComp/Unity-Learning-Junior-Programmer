@@ -5,8 +5,9 @@ using UnityEngine;
 public class DetectPlayerCollision : MonoBehaviour
 {
     //Score:
-    private float scoreValue = 1f;
+    private float deltaScore = 1f;
     private float damage = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +26,10 @@ public class DetectPlayerCollision : MonoBehaviour
             PlayerController playerComponent;
             playerComponent = this.gameObject.GetComponent<PlayerController>();
             //Update the score:
-            playerComponent.AddToScore(-scoreValue);
-            playerComponent.AddToHealth(-damage);
+            playerComponent.AddToScore(-this.deltaScore);
+            playerComponent.AddToHealth(-this.damage);
 
-            //Destroy the object and the other.
+            //Destroy the other.
             Destroy(other.gameObject);
         }
     }

@@ -24,20 +24,21 @@ public class DetectCollision : MonoBehaviour
     //Override the method OnTrigger
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != owner)
+        if (other.gameObject != this.owner && this.owner != null)
         {
-            ownerComponent = owner.GetComponent<PlayerController>();
+            this.ownerComponent = this.owner.GetComponent<PlayerController>();
 
             //Update the score:
-            ownerComponent.AddToScore(scoreValue);
+            this.ownerComponent.AddToScore(scoreValue);
 
             //Destroy the object and the other.
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
     public void setOwner (GameObject owner)
+    /*This method is called when this object is created and by its future owner.*/
     {
         this.owner = owner;
     }
