@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     //Health:
     private float maxHealth = 10f;
     private float health;
-    public float getHealth { get { return health; } } 
+    public float getHealth { get { return health; } }
+    public HealthBar playerHealthBar;
 
 
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         this.health = this.maxHealth;
+        playerHealthBar.setMaxHealth(this.maxHealth);
     }
 
     // Update is called once per frame
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
     public void AddToHealth(float amount)
     {
         this.health += amount;
+        playerHealthBar.setHealth(this.health);
     }
 
 
