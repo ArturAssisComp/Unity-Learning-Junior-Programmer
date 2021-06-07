@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     //Constraints:
     private float leftX = -24.5f, rightX = 24.5f, upZ = 17.1f, bottomZ = -2.1f;
     private float offset = 3f;
-    private float startTime = 2, delay = 0.2f;
+    public float startTime = 2, delay = 0.2f;
 
     // Start is called before the first frame update
     void Start()

@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float maxHealth = 10f;
     private float health;
     public float getHealth { get { return health; } }
-    public HealthBar playerHealthBar;
+    public ProgressBar playerHealthBar;
 
 
 
@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         this.health = this.maxHealth;
-        playerHealthBar.setMaxHealth(this.maxHealth);
+        playerHealthBar.setMaxValue(this.maxHealth);
+        playerHealthBar.setValue(this.health);
     }
 
     // Update is called once per frame
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
             {
                 //Launch the projectile:
                 this.clone = Instantiate(this.food, this.transform.position, this.food.transform.rotation);
-                this.clone.GetComponent<DetectCollision>().setOwner(this.gameObject);
+                this.clone.GetComponent<DetectEnemyCollision>().setOwner(this.gameObject);
             }
         }
     }
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
     public void AddToHealth(float amount)
     {
         this.health += amount;
-        playerHealthBar.setHealth(this.health);
+        playerHealthBar.setValue(this.health);
     }
 
 

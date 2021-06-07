@@ -256,10 +256,10 @@ GameObject:
   m_Component:
   - component: {fileID: 653241406985308338}
   - component: {fileID: 653241406977566588}
-  - component: {fileID: 653241406431971343}
   - component: {fileID: 8658041973202410044}
   - component: {fileID: 469849474185878355}
   - component: {fileID: 54340023425320608}
+  - component: {fileID: 1014972026}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -305,19 +305,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &653241406431971343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653241406984819922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0064a007f627e06489f00c4405e43dce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  food: {fileID: 7069354568716823951, guid: 83bf0d4c23af47649b8ce15503366a1d, type: 3}
 --- !u!136 &8658041973202410044
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -360,6 +347,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1014972026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653241406984819922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c09e96d2b7de9846a7f3332116292d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalMidPoint: 0
+  verticalMidPoint: 7.5
+  horizontalRange: 22
+  verticalRange: 9
+  food: {fileID: 7069354568716823951, guid: 83bf0d4c23af47649b8ce15503366a1d, type: 3}
+  playerHealthBar: {fileID: 0}
 --- !u!1 &653241406984819926
 GameObject:
   m_ObjectHideFlags: 0

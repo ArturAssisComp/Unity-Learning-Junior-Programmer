@@ -8,6 +8,8 @@ public class DetectPlayerCollision : MonoBehaviour
     private float deltaScore = 1f;
     private float damage = 1f;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class DetectPlayerCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<DetectCollision>() == null)
+        if (other.GetComponent<EnemyStatus>() != null) //If true, enemy hit the player.
         {
             PlayerController playerComponent;
             playerComponent = this.gameObject.GetComponent<PlayerController>();
