@@ -13,7 +13,6 @@ using UnityEngine;
 public class DetectEnemyCollision : MonoBehaviour
 {
     //Score:
-    public float scoreValue = 1f;
     private GameObject owner;
     private PlayerController ownerComponent;
 
@@ -21,7 +20,7 @@ public class DetectEnemyCollision : MonoBehaviour
     private EnemyStatus enemyStatus;
 
     //Hungry:
-    public float hungryValue = 1f;
+    public float hungryValue = 1f; //The amount of hungry that this projetile satisfy when it hits the enemy.
 
 
     // Start is called before the first frame update
@@ -43,11 +42,12 @@ public class DetectEnemyCollision : MonoBehaviour
         this.ownerComponent = this.owner.GetComponent<PlayerController>();
         if(this.enemyStatus != null && this.ownerComponent != null)
         {
-            //Update the score:
-            this.ownerComponent.AddToScore(this.scoreValue);
-
             //Update the hungry of the enemy:
             this.enemyStatus.AddToHungry(this.hungryValue);
+
+            //Update the score:
+            if(this.enemyStatus.getHungry >= this.enemyStatus.maxHungry)
+                this.ownerComponent.AddToScore(this.enemyStatus.score);
 
             //Destroy the object
             Destroy(this.gameObject);

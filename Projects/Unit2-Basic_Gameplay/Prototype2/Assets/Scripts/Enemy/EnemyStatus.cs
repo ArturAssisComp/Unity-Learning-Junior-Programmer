@@ -12,6 +12,13 @@ public class EnemyStatus : MonoBehaviour
     private ProgressBar progressBarComponent;
     public float getHungry{ get { return currentHungry; } }
 
+
+    //Damage to player:
+    public float damage = 1f; //The amount of damage this enemy does on the player.
+
+    //Score:
+    public float score = 1f; //The amount of score this enemy gives to the player if the former is killed by the latter. 
+
     // Start is called before the first frame update
     void Start()
     {

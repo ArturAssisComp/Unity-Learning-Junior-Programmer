@@ -116,7 +116,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 10715
+  controlID: 2241
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 424}
   m_MaxSize: {x: 4002, y: 8024}
   vertical: 1
-  controlID: 10716
+  controlID: 2242
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 10641
+  controlID: 2316
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -445,9 +445,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 1427.5409
+    m_Target: 849.38684
     speed: 2
-    m_Value: 1427.5409
+    m_Value: 849.38684
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -516,7 +516,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2adff5ffcee0f5ff180dfaff5498faff9c98faff4499faff849afaffe8a0faff909bffff
+      m_ExpandedIDs: defbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -578,7 +578,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts/Enemy
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -590,7 +590,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 90260000
     m_LastClickedID: 9872
-    m_ExpandedIDs: ffffffff0000000050280000d656000074570000ce570000f8570000fe5800001a590000ce5f0000866200008c620000
+    m_ExpandedIDs: ffffffff00000000fa26000036280000a6280000e028000032290000c0290000842a0000a42a0000002c00006a340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000050280000d656000074570000ce570000f8570000fe5800001a590000ce5f0000866200008c620000
+    m_ExpandedIDs: ffffffff00000000fa26000036280000a6280000e028000032290000c0290000842a0000a42a0000002c00006a340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

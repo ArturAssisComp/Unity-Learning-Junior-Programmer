@@ -6044,6 +6044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHungry: 3
   hungryBarUI: {fileID: 3690303480938859519}
+  damage: 2
+  score: 20
 --- !u!1 &8011595107268783663
 GameObject:
   m_ObjectHideFlags: 0
