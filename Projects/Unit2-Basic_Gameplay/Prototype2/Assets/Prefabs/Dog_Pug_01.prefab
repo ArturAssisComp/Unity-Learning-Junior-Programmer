@@ -5859,6 +5859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHungry: 3
   hungryBarUI: {fileID: 692319376467980990}
+  progressBarComponent: {fileID: 2322768649096158499}
   damage: 1
   score: 10
 --- !u!1 &4454675814910000347
@@ -6259,5 +6260,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2322768649096158499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4929061467564351338, guid: 880c6e1f4cbabb8479a12f921b8bad7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7231561152377340489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ec75eba35b4314fb8070c53086154d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

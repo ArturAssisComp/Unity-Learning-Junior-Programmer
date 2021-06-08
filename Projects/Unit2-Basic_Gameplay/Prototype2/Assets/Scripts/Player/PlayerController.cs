@@ -11,9 +11,8 @@ public class PlayerController : MonoBehaviour
     //Movement Constraints:
     public float horizontalMidPoint = 0f, verticalMidPoint = 7.5f, horizontalRange = 22f, verticalRange = 9f;
 
-    //Projetile:
-    public GameObject food;
-    private GameObject clone;
+
+
 
     //Score:
     private float score = 0;
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Setup the health:
         this.health = this.maxHealth;
         playerHealthBar.setMaxValue(this.maxHealth);
         playerHealthBar.setValue(this.health);
@@ -54,14 +54,6 @@ public class PlayerController : MonoBehaviour
             direction.Normalize();
 
             MovePlayer(direction, this.speed, this.horizontalMidPoint, this.horizontalRange, this.verticalMidPoint, this.verticalRange);
-
-            //Get the input from space bar:
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //Launch the projectile:
-                this.clone = Instantiate(this.food, this.transform.position, this.food.transform.rotation);
-                this.clone.GetComponent<DetectEnemyCollision>().setOwner(this.gameObject);
-            }
         }
     }
 

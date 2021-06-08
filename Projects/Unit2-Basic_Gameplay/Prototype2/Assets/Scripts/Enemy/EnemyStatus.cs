@@ -9,7 +9,7 @@ public class EnemyStatus : MonoBehaviour
     public float maxHungry = 3f;
     private float currentHungry;
     public GameObject hungryBarUI;
-    private ProgressBar progressBarComponent;
+    public ProgressBar progressBarComponent;
     public float getHungry{ get { return currentHungry; } }
 
 
@@ -22,7 +22,6 @@ public class EnemyStatus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        progressBarComponent = this.hungryBarUI.GetComponentInChildren<ProgressBar>();
         this.currentHungry = 0f;
         this.progressBarComponent.setMaxValue(this.maxHungry);
         this.progressBarComponent.setValue(this.currentHungry);

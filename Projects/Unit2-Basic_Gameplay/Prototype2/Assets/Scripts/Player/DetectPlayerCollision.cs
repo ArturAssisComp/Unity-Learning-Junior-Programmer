@@ -26,7 +26,7 @@ public class DetectPlayerCollision : MonoBehaviour
         if (this.enemy != null) //If true, enemy hit the player.
         {
             PlayerController playerComponent;
-            playerComponent = this.gameObject.GetComponent<PlayerController>();
+            playerComponent = this.transform.parent.gameObject.GetComponent<PlayerController>();
             //Update the score:
             playerComponent.AddToScore(-this.enemy.score);
             playerComponent.AddToHealth(-this.enemy.damage);
