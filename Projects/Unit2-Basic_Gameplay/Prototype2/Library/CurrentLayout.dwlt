@@ -21,11 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-<<<<<<< HEAD
-  m_MinSize: {x: 950, y: 300}
-=======
   m_MinSize: {x: 950, y: 498}
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -50,11 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1280
     height: 638
-<<<<<<< HEAD
-  m_MinSize: {x: 950, y: 300}
-=======
   m_MinSize: {x: 950, y: 498}
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -124,11 +116,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 448}
   m_MaxSize: {x: 12008, y: 8048}
   vertical: 0
-<<<<<<< HEAD
-  controlID: 12
-=======
   controlID: 168
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,11 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 448}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 13
-=======
-  controlID: 169
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
+  controlID: 202
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -235,11 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 348}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 92
-=======
-  controlID: 208
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
+  controlID: 220
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,8 +239,8 @@ MonoBehaviour:
     y: 0
     width: 321
     height: 269
-  m_MinSize: {x: 204, y: 224}
-  m_MaxSize: {x: 4004, y: 4024}
+  m_MinSize: {x: 202, y: 224}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -534,13 +514,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 88300000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-<<<<<<< HEAD
-      m_ExpandedIDs: 44f4ffff
-=======
       m_ExpandedIDs: defbffff
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -607,18 +583,14 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Artur\Desktop\Secundarios\Backup-USB\Unity-Learning-Junior-Programmer\Projects\Unit2-Basic_Gameplay\Prototype2
+  m_LastProjectPath: C:\Users\Artur\Desktop\unity_learning\Create_with_code\Unity-Learning-Junior-Programmer\Projects\Unit2-Basic_Gameplay\Prototype2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 90260000
     m_LastClickedID: 9872
-<<<<<<< HEAD
-    m_ExpandedIDs: 00000000622900005030000086310000f2310000263200007232000098330000b6330000a2340000a23b0000
-=======
     m_ExpandedIDs: 00000000fe26000038280000a8280000e228000036290000c4290000882a0000a82a0000042c000000350000
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -646,11 +618,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
-    m_ExpandedIDs: ffffffff00000000622900005030000086310000f2310000263200007232000098330000b6330000a2340000a23b0000
-=======
     m_ExpandedIDs: 00000000fe26000038280000a8280000e228000036290000c4290000882a0000a82a0000042c000000350000
->>>>>>> 39cefa5b47bd85b7aefc940aa0529b8da7ac64f5
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
