@@ -32,21 +32,9 @@ public class Cube : MonoBehaviour
 
         //Define the rotation and position speed:
         this.positionSpeed =  10f + Random.value * maxPositionSpeed;
-        this.xRotationSpeed = Random.value * maxRotationSpeed;
-        this.yRotationSpeed = Random.value * maxRotationSpeed;
-        this.zRotationSpeed = Random.value * maxRotationSpeed;
-
-        //Move the object:
-        this.transform.parent.transform.position = this.translatePosition(this.currentPosition);
-
-        //Change its scale:
-        transform.localScale = this.scalePosition(this.currentPosition);
-
-        //Rotate:
-        transform.Rotate(xRotationSpeed * Time.fixedDeltaTime, yRotationSpeed * Time.fixedDeltaTime, zRotationSpeed * Time.fixedDeltaTime);
-
-        //Change the color of the cube:
-        this.Renderer.material.color = colorPosition(this.currentPosition);
+        this.xRotationSpeed = maxRotationSpeed * (Random.value * 2 - 1);
+        this.yRotationSpeed = maxRotationSpeed * (Random.value * 2 - 1);
+        this.zRotationSpeed = maxRotationSpeed * (Random.value * 2 - 1);
     }
     
     private void FixedUpdate()
