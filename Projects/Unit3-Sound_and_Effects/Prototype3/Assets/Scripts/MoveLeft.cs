@@ -8,6 +8,7 @@ public class MoveLeft : MonoBehaviour
     /*Attributes*/
 
     private float speed = 10f;
+    private PlayerController playerControllerScript;
 
     //-----------------------------------------------------
     /*Methods*/
@@ -15,7 +16,11 @@ public class MoveLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //-----------------------------------------------------
+        //Get the element playerController:
+        this.playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        //-----------------------------------------------------
     }
 
     // Update is called once per frame
@@ -23,7 +28,8 @@ public class MoveLeft : MonoBehaviour
     {
         //-----------------------------------------------------
         //Move the game object to the left:
-        this.transform.Translate(Vector3.left * Time.deltaTime * this.speed);
+        if (this.playerControllerScript.isGameOver == false)
+            this.transform.Translate(Vector3.left * Time.deltaTime * this.speed);
 
         //-----------------------------------------------------
     }

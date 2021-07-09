@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     private float minDelay = 1f, maxDelay = 2f;
     private float currentDelay = 0f, limitDelay;
     private int nextIndex;
+    private PlayerController playerControllerScript;
 
     //Obstacles:
     public GameObject[] obstacles;
@@ -26,32 +27,39 @@ public class SpawnManager : MonoBehaviour
         this.limitDelay = Mathf.Clamp(Random.value * this.maxDelay, this.minDelay, this.maxDelay);
 
         //-----------------------------------------------------
+        //Get the element playerController:
+        this.playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        //-----------------------------------------------------
     }
 
     // Update is called once per frame
     void Update()
     {
-        //-----------------------------------------------------
-        //Increment the time:
-        this.currentDelay += Time.deltaTime;
-
-        //-----------------------------------------------------
-        //Check if the time reach the limit to invoke a new obstacle:
-        if (this.currentDelay > this.limitDelay)
+        if (this.playerControllerScript.isGameOver == false)
         {
             //-----------------------------------------------------
-            //Reset the current delay and calculate a new limit:
-            this.currentDelay = 0;
-            this.limitDelay = Mathf.Clamp(Random.value * this.maxDelay, this.minDelay, this.maxDelay);
+            //Increment the time:
+            this.currentDelay += Time.deltaTime;
 
             //-----------------------------------------------------
-            //Create a new obstacle:
-            CreateNewObstacle();
+            //Check if the time reach the limit to invoke a new obstacle:
+            if (this.currentDelay > this.limitDelay)
+            {
+                //-----------------------------------------------------
+                //Reset the current delay and calculate a new limit:
+                this.currentDelay = 0;
+                this.limitDelay = Mathf.Clamp(Random.value * this.maxDelay, this.minDelay, this.maxDelay);
+
+                //-----------------------------------------------------
+                //Create a new obstacle:
+                CreateNewObstacle();
+
+                //-----------------------------------------------------
+            }
 
             //-----------------------------------------------------
         }
-
-        //-----------------------------------------------------
     }
 
     //Method for creating new obstacles:

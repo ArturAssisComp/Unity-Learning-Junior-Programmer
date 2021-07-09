@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 700f;
     public float gravityModifier = 3f;
     private bool isOnGround = true;
+    private bool gameOver = false;
+    public bool isGameOver { get { return this.gameOver; } }
     //---------------------------------------------------------------
     //Methods:
 
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
         this.playerRigidbody = GetComponent<Rigidbody>();
         //---------------------------------------------------------------
         //Change gravity:
-        Physics.gravity *= gravityModifier;
+        Physics.gravity *= this.gravityModifier;
         //---------------------------------------------------------------
     }
 
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
             this.playerRigidbody.AddForce(Vector3.up * this.jumpForce, ForceMode.Impulse);
 
             //Change state of isOnGround to false:
-            isOnGround = false;
+            this.isOnGround = false;
         }
         //---------------------------------------------------------------
     }
@@ -47,9 +49,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //---------------------------------------------------------------
-        //Check if the player collides with the ground:
-        if (collision.transform.gameObject.name.Equals("Ground"))
-            isOnGround = true;
+        //Check if the player collided with the ground:
+        if (collision.gameObject.CompareTag("Ground"))
+            this.isOnGround = true;
+        //Check if the player collided with an obstacle:
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            this.gameOver = true;
+            Debug.Log("Game Over!");
+        }
         //---------------------------------------------------------------
     }
 
