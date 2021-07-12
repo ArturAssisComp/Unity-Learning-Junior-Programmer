@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     //---------------------------------------------------------------
     //Player Components:
     private Rigidbody playerRigidbody;
+    private Animator playerAnimator;
+    public ParticleSystem playerExplosionEffect;
     //---------------------------------------------------------------
     //Player status:
     public float jumpForce = 700f;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
         //---------------------------------------------------------------
         //Get player components:
         this.playerRigidbody = GetComponent<Rigidbody>();
+        this.playerAnimator = GetComponent<Animator>();
         //---------------------------------------------------------------
         //Change gravity:
         Physics.gravity *= this.gravityModifier;
@@ -35,13 +38,16 @@ public class PlayerController : MonoBehaviour
     {
         //---------------------------------------------------------------
         //Apply upwards force if the player press space bar:
-        if (Input.GetKeyDown(KeyCode.Space) && this.isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && this.isOnGround && !this.gameOver)
         {
             //Apply updwards force:
             this.playerRigidbody.AddForce(Vector3.up * this.jumpForce, ForceMode.Impulse);
 
             //Change state of isOnGround to false:
             this.isOnGround = false;
+
+            //Set the jump_trig animator parameter:
+            playerAnimator.SetTrigger("Jump_trig");
         }
         //---------------------------------------------------------------
     }
@@ -55,8 +61,21 @@ public class PlayerController : MonoBehaviour
         //Check if the player collided with an obstacle:
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            //---------------------------------------------------------------
+            //Set game over:
             this.gameOver = true;
             Debug.Log("Game Over!");
+
+            //---------------------------------------------------------------
+            //Set the animation to death:
+            playerAnimator.SetBool("Death_b", true);
+            playerAnimator.SetInteger("DeathType_int", 1);
+
+            //---------------------------------------------------------------
+            //Set the particles effect:
+            this.playerExplosionEffect.Play();
+
+            //---------------------------------------------------------------
         }
         //---------------------------------------------------------------
     }

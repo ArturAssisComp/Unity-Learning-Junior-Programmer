@@ -7,7 +7,7 @@ public class MoveLeft : MonoBehaviour
     //-----------------------------------------------------
     /*Attributes*/
 
-    private float speed = 10f;
+    private float speed = 20f;
     private PlayerController playerControllerScript;
 
     //-----------------------------------------------------
