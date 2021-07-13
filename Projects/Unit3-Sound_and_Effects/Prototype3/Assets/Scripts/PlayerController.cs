@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //---------------------------------------------------------------
-    //Player Components:
+    //Player Components and parts:
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
+    private AudioSource playerAudioSource;
     public ParticleSystem playerExplosionEffect;
+    public ParticleSystem playerDirtEffect;
     //---------------------------------------------------------------
     //Player status:
     public float jumpForce = 700f;
@@ -16,6 +18,11 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
     private bool gameOver = false;
     public bool isGameOver { get { return this.gameOver; } }
+    //---------------------------------------------------------------
+    //Sound effects:
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
+
     //---------------------------------------------------------------
     //Methods:
 
@@ -27,6 +34,7 @@ public class PlayerController : MonoBehaviour
         //Get player components:
         this.playerRigidbody = GetComponent<Rigidbody>();
         this.playerAnimator = GetComponent<Animator>();
+        this.playerAudioSource = GetComponent<AudioSource>();
         //---------------------------------------------------------------
         //Change gravity:
         Physics.gravity *= this.gravityModifier;
@@ -40,14 +48,26 @@ public class PlayerController : MonoBehaviour
         //Apply upwards force if the player press space bar:
         if (Input.GetKeyDown(KeyCode.Space) && this.isOnGround && !this.gameOver)
         {
+            //---------------------------------------------------------------
             //Apply updwards force:
             this.playerRigidbody.AddForce(Vector3.up * this.jumpForce, ForceMode.Impulse);
 
+            //---------------------------------------------------------------
             //Change state of isOnGround to false:
             this.isOnGround = false;
 
+            //---------------------------------------------------------------
             //Set the jump_trig animator parameter:
-            playerAnimator.SetTrigger("Jump_trig");
+            this.playerAnimator.SetTrigger("Jump_trig");
+
+            //---------------------------------------------------------------
+            //Stop the dirt effect:
+            this.playerDirtEffect.Stop();
+            //---------------------------------------------------------------
+            //Play the audio effect:
+            this.playerAudioSource.PlayOneShot(this.jumpSound);
+
+            //---------------------------------------------------------------
         }
         //---------------------------------------------------------------
     }
@@ -57,7 +77,11 @@ public class PlayerController : MonoBehaviour
         //---------------------------------------------------------------
         //Check if the player collided with the ground:
         if (collision.gameObject.CompareTag("Ground"))
+        {
             this.isOnGround = true;
+            this.playerDirtEffect.Play();
+
+        }
         //Check if the player collided with an obstacle:
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -68,13 +92,20 @@ public class PlayerController : MonoBehaviour
 
             //---------------------------------------------------------------
             //Set the animation to death:
-            playerAnimator.SetBool("Death_b", true);
-            playerAnimator.SetInteger("DeathType_int", 1);
+            this.playerAnimator.SetBool("Death_b", true);
+            this.playerAnimator.SetInteger("DeathType_int", 1);
 
             //---------------------------------------------------------------
             //Set the particles effect:
             this.playerExplosionEffect.Play();
 
+            //---------------------------------------------------------------
+            //Stop the dirt effect:
+            this.playerDirtEffect.Stop();
+
+            //---------------------------------------------------------------
+            //Play the audio effect:
+            this.playerAudioSource.PlayOneShot(this.crashSound);
             //---------------------------------------------------------------
         }
         //---------------------------------------------------------------
