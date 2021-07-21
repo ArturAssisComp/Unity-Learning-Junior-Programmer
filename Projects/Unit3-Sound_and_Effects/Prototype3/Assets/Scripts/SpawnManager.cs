@@ -8,13 +8,14 @@ public class SpawnManager : MonoBehaviour
     /*Attributes*/
 
     //General status:
-    private float minDelay = 1f, maxDelay = 2f;
+    private float minDelay = 0.8f, maxDelay = 2.5f;
     private float currentDelay = 0f, limitDelay;
     private int nextIndex;
     private PlayerController playerControllerScript;
 
     //Obstacles:
     public GameObject[] obstacles;
+    private Vector3 initialPosition = new Vector3(35.5f, 0, 0);
     //-----------------------------------------------------
     /*Methods*/
 
@@ -53,7 +54,7 @@ public class SpawnManager : MonoBehaviour
 
                 //-----------------------------------------------------
                 //Create a new obstacle:
-                CreateNewObstacle();
+                CreateNewObstacle(this.initialPosition);
 
                 //-----------------------------------------------------
             }
@@ -63,10 +64,10 @@ public class SpawnManager : MonoBehaviour
     }
 
     //Method for creating new obstacles:
-    private void CreateNewObstacle()
+    private void CreateNewObstacle(Vector3 initialPosition)
     {
         this.nextIndex = Random.Range(0, obstacles.Length);
-        Instantiate(obstacles[nextIndex]);
+        Instantiate(obstacles[nextIndex], initialPosition, obstacles[nextIndex].transform.rotation);
     }
     //-----------------------------------------------------
 }

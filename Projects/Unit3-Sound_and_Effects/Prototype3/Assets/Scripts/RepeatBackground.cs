@@ -21,6 +21,7 @@ public class RepeatBackground : MonoBehaviour
         this. repeatWidth = this.GetComponent<SpriteRenderer>().size.x / 2;
     }
 
+
     // Update is called once per frame
     void Update()
     {

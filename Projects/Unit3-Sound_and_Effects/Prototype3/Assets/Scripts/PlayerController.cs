@@ -13,11 +13,14 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem playerDirtEffect;
     //---------------------------------------------------------------
     //Player status:
-    public float jumpForce = 700f;
-    public float gravityModifier = 3f;
     private bool isOnGround = true;
     private bool gameOver = false;
+    private bool willJump = false;
     public bool isGameOver { get { return this.gameOver; } }
+    private int numOfJumps = 0;
+    public float firstJumpForce = 2000f;
+    public float secondJumpForce = 1800f;
+    public float gravityModifier = 9f;
     //---------------------------------------------------------------
     //Sound effects:
     public AudioClip jumpSound;
@@ -46,31 +49,66 @@ public class PlayerController : MonoBehaviour
     {
         //---------------------------------------------------------------
         //Apply upwards force if the player press space bar:
-        if (Input.GetKeyDown(KeyCode.Space) && this.isOnGround && !this.gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && this.numOfJumps < 2 && !this.gameOver)
+        {
+            this.willJump = true;
+            this.numOfJumps++;
+        }
+        //---------------------------------------------------------------
+    }
+
+    private void FixedUpdate()
+    {
+        if(this.willJump)
         {
             //---------------------------------------------------------------
-            //Apply updwards force:
-            this.playerRigidbody.AddForce(Vector3.up * this.jumpForce, ForceMode.Impulse);
+            if(this.numOfJumps == 1)
+            {
+                //---------------------------------------------------------------
+                //Set the jump_trig animator parameter:
+                this.playerAnimator.SetTrigger("Jump_trig");
 
-            //---------------------------------------------------------------
-            //Change state of isOnGround to false:
-            this.isOnGround = false;
+                //---------------------------------------------------------------
+                //Apply updwards force:
+                this.playerRigidbody.AddForce(Vector3.up * this.firstJumpForce, ForceMode.Impulse);
 
-            //---------------------------------------------------------------
-            //Set the jump_trig animator parameter:
-            this.playerAnimator.SetTrigger("Jump_trig");
+                //---------------------------------------------------------------
+                //Change state of isOnGround to false:
+                this.isOnGround = false;
 
-            //---------------------------------------------------------------
-            //Stop the dirt effect:
-            this.playerDirtEffect.Stop();
+                //---------------------------------------------------------------
+                //Stop the dirt effect:
+                this.playerDirtEffect.Stop();
+
+                //---------------------------------------------------------------
+            }
+            else if (this.numOfJumps == 2)
+            {
+                //---------------------------------------------------------------
+                //Set the jump_trig animator parameter:
+                this.playerAnimator.SetTrigger("Second_Jump_trig");
+
+                //---------------------------------------------------------------
+                //Apply updwards force:
+                this.playerRigidbody.AddForce(Vector3.up * this.secondJumpForce, ForceMode.Impulse);
+
+                //---------------------------------------------------------------
+            }
+
+
             //---------------------------------------------------------------
             //Play the audio effect:
             this.playerAudioSource.PlayOneShot(this.jumpSound);
 
             //---------------------------------------------------------------
+            //Reset willJump bool:
+            this.willJump = false;
+
+            //---------------------------------------------------------------
         }
-        //---------------------------------------------------------------
     }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -78,12 +116,16 @@ public class PlayerController : MonoBehaviour
         //Check if the player collided with the ground:
         if (collision.gameObject.CompareTag("Ground"))
         {
+            //Go back to the ground and reset the number of jumps:
             this.isOnGround = true;
-            this.playerDirtEffect.Play();
+            this.numOfJumps = 0;
+
+            if(!this.gameOver)
+                this.playerDirtEffect.Play();
 
         }
         //Check if the player collided with an obstacle:
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle") && !this.gameOver)
         {
             //---------------------------------------------------------------
             //Set game over:
@@ -106,10 +148,19 @@ public class PlayerController : MonoBehaviour
             //---------------------------------------------------------------
             //Play the audio effect:
             this.playerAudioSource.PlayOneShot(this.crashSound);
+
+            //---------------------------------------------------------------
+            //Stop the music:
+            GameObject.Find("Main Camera").GetComponent<AudioSource>().Stop();
+
             //---------------------------------------------------------------
         }
         //---------------------------------------------------------------
     }
 
+    public void SetSpeedUpAnimator(bool value)
+    {
+        this.playerAnimator.SetBool("SpeedUp", value);
+    }
 
 }
