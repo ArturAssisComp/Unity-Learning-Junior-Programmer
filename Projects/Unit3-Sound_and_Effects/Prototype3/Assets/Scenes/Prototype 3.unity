@@ -219,7 +219,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341826126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc4a37a03a338b74b8c4664dde0eebe0, type: 3}
   m_Name: 
@@ -235,6 +235,56 @@ MonoBehaviour:
   - {fileID: 7938782328090035164, guid: c8e43f6cbb4f0aa48bc15b682661fd6a, type: 3}
   - {fileID: 1256154516784375843, guid: d708a2c5da88ad34cb257d22de9664ad, type: 3}
   - {fileID: 9120345156261681241, guid: 38e89454e08e2f2469457739ff6e7a8a, type: 3}
+--- !u!1 &406229229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406229231}
+  - component: {fileID: 406229230}
+  m_Layer: 0
+  m_Name: CutSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406229230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406229229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2c16951f5ba774e9a45e4b498dc9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGameObject: {fileID: 774067135}
+  dirtParticleEffect: {fileID: 638974640}
+  background: {fileID: 835818919}
+  spawnManager: {fileID: 341826126}
+  scoreManager: {fileID: 1114280043}
+  mainCamera: {fileID: 534669902}
+  playerSpeed: 3
+--- !u!4 &406229231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406229229}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9920442, y: 3.8682632, z: 0.3398018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +375,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 606910ec401804eb09925f0d57909c04, type: 3}
@@ -414,6 +464,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!198 &638974640 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5882403995726286126, guid: 0076ee74e233f4247b57e5745db2dad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5882403995979246106}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &774067135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5882403995888820682, guid: 0076ee74e233f4247b57e5745db2dad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5882403995979246106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &835818919
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835818919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 538107e4222188f4e8d0aeb1ae56ba06, type: 3}
   m_Name: 
@@ -543,7 +605,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114280043}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e5f9d852acf1984c90ea573d360874e, type: 3}
   m_Name: 
@@ -661,6 +723,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5882403995657825852, guid: 0076ee74e233f4247b57e5745db2dad7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
     - target: {fileID: 5882403995657825854, guid: 0076ee74e233f4247b57e5745db2dad7,
         type: 3}
       propertyPath: firstJumpForce
@@ -671,6 +738,16 @@ PrefabInstance:
       propertyPath: secondJumpForce
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 5882403995657825854, guid: 0076ee74e233f4247b57e5745db2dad7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5882403995657825855, guid: 0076ee74e233f4247b57e5745db2dad7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5882403995888820682, guid: 0076ee74e233f4247b57e5745db2dad7,
         type: 3}
       propertyPath: m_Name
@@ -679,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 5882403995888991722, guid: 0076ee74e233f4247b57e5745db2dad7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 5882403995888991722, guid: 0076ee74e233f4247b57e5745db2dad7,
         type: 3}
