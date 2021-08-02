@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Atributes:
-    public float force = 5;
+    public float force = 5f;
+    private float powerUpForce = 10f;
     private float input;
     private Rigidbody rigidBody;
     private GameObject CameraCenterPoint;
+    private bool hasPowerUp = false;
 
 
     // Start is called before the first frame update
@@ -37,6 +39,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Check if it is a power up:
+        if(other.CompareTag("PowerUp"))
+        {
+            this.hasPowerUp = true;
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Check if the player collides with enemy while with power up:
+        if (collision.gameObject.CompareTag("Enemy") && this.hasPowerUp)
+        {
+            Vector3 awayDirection = (collision.gameObject.transform.position - this.transform.position).normalized;
+            Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();
+
+            enemyRigidBody.AddForce(awayDirection * this.powerUpForce, ForceMode.Impulse);
+
+            Debug.Log("Player collided with " + collision.gameObject.name + " with hasPowerUp == " + this.hasPowerUp);
+        }
+    }
 
 
 }
