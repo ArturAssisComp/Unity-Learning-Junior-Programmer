@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     //Attributes:
     private float power = 10f;
+    private float yLowerBound = -10f;
 
     private Rigidbody enemyRigidbody;
     private GameObject player;
@@ -18,6 +19,13 @@ public class Enemy : MonoBehaviour
         //Get components:
         this.enemyRigidbody = this.GetComponent<Rigidbody>();
         this.player = GameObject.Find("Player");
+    }
+
+    private void Update()
+    {
+        //Delete enemies out of bound:
+        if (this.transform.position.y < this.yLowerBound)
+            Destroy(this.gameObject);
     }
 
     // Update is called once per frame
