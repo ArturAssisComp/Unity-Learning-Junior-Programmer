@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     //Attributes:
-    private float power = 10f;
+    public float power = 10f;
     private float yLowerBound = -10f;
 
     private Rigidbody enemyRigidbody;

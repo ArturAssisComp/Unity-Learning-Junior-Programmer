@@ -599,8 +599,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc963a6b8b2c2604cafd79d954ac57aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7001230711249623475, guid: 3675b53f64c87a84f965a9f960e79d83, type: 3}
-  powerUp: {fileID: 8027616002277085317, guid: a2d164dc8b9675e438e6a2737305e63f, type: 3}
+  enemy:
+  - {fileID: 7001230711249623475, guid: 3675b53f64c87a84f965a9f960e79d83, type: 3}
+  - {fileID: 7001230711249623475, guid: 3675b53f64c87a84f965a9f960e79d83, type: 3}
+  - {fileID: 7001230711249623475, guid: 3675b53f64c87a84f965a9f960e79d83, type: 3}
+  - {fileID: 7484155973908016587, guid: 2543a2ceb9b347648bef0b21a2c18758, type: 3}
+  - {fileID: 7484155973908016587, guid: 2543a2ceb9b347648bef0b21a2c18758, type: 3}
+  - {fileID: 7484155973908016587, guid: 2543a2ceb9b347648bef0b21a2c18758, type: 3}
+  - {fileID: 190216533483338223, guid: 29a55beb6f7698345861839d6b7ea58c, type: 3}
+  - {fileID: 190216533483338223, guid: 29a55beb6f7698345861839d6b7ea58c, type: 3}
+  - {fileID: 8526393623030435146, guid: fbd24e2ea4b87874d81f658866ea42bb, type: 3}
+  powerUp:
+  - {fileID: 8027616002277085317, guid: a2d164dc8b9675e438e6a2737305e63f, type: 3}
+  - {fileID: 5740840486886954192, guid: a766f90f2312add4f817e538a8156163, type: 3}
 --- !u!4 &2052205634
 Transform:
   m_ObjectHideFlags: 0
@@ -687,6 +698,17 @@ PrefabInstance:
       propertyPath: powerUpIndicator
       value: 
       objectReference: {fileID: 1418035550}
+    - target: {fileID: 3869885521432357989, guid: 039a691575b81f545a30f7dfc1c7c75e,
+        type: 3}
+      propertyPath: projetile
+      value: 
+      objectReference: {fileID: 2580904353760818409, guid: c6ec56821a55881468c53f891f969a1e,
+        type: 3}
+    - target: {fileID: 3869885521432357989, guid: 039a691575b81f545a30f7dfc1c7c75e,
+        type: 3}
+      propertyPath: force
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 039a691575b81f545a30f7dfc1c7c75e, type: 3}
 --- !u!1001 &7305732181041295649

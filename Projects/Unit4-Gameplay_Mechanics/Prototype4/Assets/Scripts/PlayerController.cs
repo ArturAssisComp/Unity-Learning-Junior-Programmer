@@ -13,7 +13,13 @@ public class PlayerController : MonoBehaviour
     private float countdownTime = 4f;
     private Rigidbody rigidBody;
     private GameObject CameraCenterPoint;
-    private bool hasPowerUp = false;
+    private bool hasRepelentPowerUp = false;
+    private bool hasMachineGunPowerUp = false;
+
+    //Attributes for machine gun shooting:
+    public GameObject projetile;
+    private GameObject[] enemies;
+    private Vector3 shootingDirection;
 
 
     // Start is called before the first frame update
@@ -34,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
         //Update the position of the power up:
         this.powerUpIndicator.transform.position = this.transform.position + this.powerUpOffSet;
+
     }
 
     private void FixedUpdate()
@@ -49,26 +56,56 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Check if it is a power up:
-        if(other.CompareTag("PowerUp"))
+        if(this.hasMachineGunPowerUp == false && this.hasRepelentPowerUp == false)
         {
-            this.hasPowerUp = true;
-            this.powerUpIndicator.SetActive(true);
-            Destroy(other.gameObject);
-            StartCoroutine(this.PowerUpCountdownRoutine());
+            if(other.CompareTag("RepelentPowerUp"))
+            {
+                this.hasRepelentPowerUp = true;
+                this.powerUpIndicator.SetActive(true);
+                Destroy(other.gameObject);
+                StartCoroutine(this.PowerUpCountdownRoutine("Repelent"));
+            }
+            else if (other.CompareTag("MachineGunPowerUp"))
+            {
+                this.hasMachineGunPowerUp = true;
+                this.powerUpIndicator.SetActive(true);
+                Destroy(other.gameObject);
+                StartCoroutine(this.PowerUpCountdownRoutine("MachineGun"));
+
+                InvokeRepeating("ShootAllEnemies", 0.01f, 0.2f); 
+            }
         }
     }
 
-    IEnumerator PowerUpCountdownRoutine()
+    private void ShootAllEnemies()
+    {
+        this.enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var item in this.enemies)
+        {
+            this.shootingDirection = item.transform.position - this.transform.position;
+            Instantiate(this.projetile, this.transform.position, Quaternion.FromToRotation(this.projetile.transform.forward, this.shootingDirection));
+        }
+    }
+
+    IEnumerator PowerUpCountdownRoutine(string type)
     {
         yield return new WaitForSeconds(this.countdownTime);
         this.powerUpIndicator.SetActive(false);
-        this.hasPowerUp = false;
+
+        if(type.Equals("Repelent"))
+            this.hasRepelentPowerUp = false;
+        else if(type.Equals("MachineGun"))
+        {
+            this.hasMachineGunPowerUp = false;
+            CancelInvoke("ShootAllEnemies");
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //Check if the player collides with enemy while with power up:
-        if (collision.gameObject.CompareTag("Enemy") && this.hasPowerUp)
+        if (collision.gameObject.CompareTag("Enemy") && this.hasRepelentPowerUp)
         {
             Vector3 awayDirection = (collision.gameObject.transform.position - this.transform.position).normalized;
             Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();

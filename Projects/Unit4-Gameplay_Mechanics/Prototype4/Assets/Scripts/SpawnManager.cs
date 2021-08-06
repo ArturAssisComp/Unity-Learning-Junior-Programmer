@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     //Attributes:
-    public GameObject enemy;
-    public GameObject powerUp;
+    public GameObject[] enemy;
+    public GameObject[] powerUp;
     private int enemiesPerWave = 1;
     private int currentNumberOfEnemies = 0;
 
@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         this.SpawnWave(enemiesPerWave);
-        Instantiate(this.powerUp, this.GenerateSpawnPosition(), this.powerUp.transform.rotation);
+        this.SpawnPowerUp(1);
     }
 
     // Update is called once per frame
@@ -28,14 +28,36 @@ public class SpawnManager : MonoBehaviour
         {
             this.enemiesPerWave++;
             this.SpawnWave(this.enemiesPerWave);
-            Instantiate(this.powerUp, this.GenerateSpawnPosition(), this.powerUp.transform.rotation);
+            this.SpawnPowerUp(1);
         }
     }
 
     private void SpawnWave(int numberOfEnemies)
     {
+        int enemyIndex = 0;
+
         for(int i = 0; i < numberOfEnemies; i++)
-            Instantiate(this.enemy, GenerateSpawnPosition(), enemy.transform.rotation);
+        {
+            if (numberOfEnemies > 3)
+                enemyIndex = Random.Range(0, this.enemy.Length);
+
+            Instantiate(this.enemy[enemyIndex], GenerateSpawnPosition(), this.enemy[enemyIndex].transform.rotation);
+
+        }
+
+
+    }
+
+    private void SpawnPowerUp(int numberOfPowerUps)
+    {
+        int powerUpIndex = 0;
+
+        for(int i = 0; i < numberOfPowerUps; i++)
+        {
+            powerUpIndex = Random.Range(0, this.powerUp.Length);
+            Instantiate(this.powerUp[powerUpIndex], GenerateSpawnPosition(), this.powerUp[powerUpIndex].transform.rotation);
+
+        }
     }
 
     private Vector3 GenerateSpawnPosition()
