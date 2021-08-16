@@ -9,12 +9,12 @@ public class Enemy : MonoBehaviour
     public float power = 10f;
     private float yLowerBound = -10f;
 
-    private Rigidbody enemyRigidbody;
+    public Rigidbody enemyRigidbody;
     private GameObject player;
 
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         //Get components:
         this.enemyRigidbody = this.GetComponent<Rigidbody>();

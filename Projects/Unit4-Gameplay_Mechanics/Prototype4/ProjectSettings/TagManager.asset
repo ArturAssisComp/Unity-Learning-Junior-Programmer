@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - RepelentPowerUp
   - MachineGunPowerUp
+  - SmashAttackPowerUp
+  - Floor
+  - Boss
   layers:
   - Default
   - TransparentFX

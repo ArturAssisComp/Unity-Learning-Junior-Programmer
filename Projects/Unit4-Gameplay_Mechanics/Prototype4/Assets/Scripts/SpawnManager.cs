@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     //Attributes:
     public GameObject[] enemy;
     public GameObject[] powerUp;
+    private float waveLevel = 1;
+    private float deltaWaveLevel = 0.2f;
     private int enemiesPerWave = 1;
     private int currentNumberOfEnemies = 0;
 
@@ -26,7 +28,11 @@ public class SpawnManager : MonoBehaviour
         
         if(this.currentNumberOfEnemies == 0)
         {
+            //Increase difficult:
             this.enemiesPerWave++;
+            this.waveLevel += this.deltaWaveLevel;
+
+            //Spawn enemies and a power up:
             this.SpawnWave(this.enemiesPerWave);
             this.SpawnPowerUp(1);
         }
@@ -38,14 +44,17 @@ public class SpawnManager : MonoBehaviour
 
         for(int i = 0; i < numberOfEnemies; i++)
         {
-            if (numberOfEnemies > 3)
-                enemyIndex = Random.Range(0, this.enemy.Length);
+            for (int j = 1; j <= this.enemy.Length; j++)
+            {
+                if (Random.value <= 1 / Mathf.Pow(this.waveLevel, j))
+                {
+                    enemyIndex = Random.Range(0, j);
+                    break;
+                }
+            }
 
             Instantiate(this.enemy[enemyIndex], GenerateSpawnPosition(), this.enemy[enemyIndex].transform.rotation);
-
         }
-
-
     }
 
     private void SpawnPowerUp(int numberOfPowerUps)
