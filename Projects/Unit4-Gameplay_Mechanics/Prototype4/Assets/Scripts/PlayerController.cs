@@ -114,6 +114,14 @@ public class PlayerController : MonoBehaviour
             this.shootingDirection = item.transform.position - this.transform.position;
             Instantiate(this.projetile, this.transform.position, Quaternion.FromToRotation(this.projetile.transform.forward, this.shootingDirection));
         }
+
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        if(boss != null)
+        {
+            this.shootingDirection = boss.transform.position - this.transform.position;
+            Instantiate(this.projetile, this.transform.position, Quaternion.FromToRotation(this.projetile.transform.forward, this.shootingDirection));
+        }
+
     }
     private void SmashAttackAllEnemies()
     {

@@ -10,6 +10,7 @@ public class Projetile : MonoBehaviour
     private float totalDistance = 0f;
     private float deltaDistance;
     private float maxDistance = 30f;
+    private float bossHealthDamage = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,18 @@ public class Projetile : MonoBehaviour
             //Apply away force to the enemy:
             Vector3 awayDirection = other.gameObject.transform.position - this.transform.position;
             other.gameObject.GetComponent<Rigidbody>().AddForce(awayDirection * this.hitPower, ForceMode.Impulse);
+
+            //Destroy the projetile:
+            Destroy(this.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Boss"))
+        {
+            //Apply away force to the enemy:
+            Vector3 awayDirection = other.gameObject.transform.position - this.transform.position;
+            other.gameObject.GetComponent<Rigidbody>().AddForce(awayDirection * this.hitPower, ForceMode.Impulse);
+
+            //Cause damage to the boss:
+            other.gameObject.GetComponent<Boss>().AddToHealth(-this.bossHealthDamage);
 
             //Destroy the projetile:
             Destroy(this.gameObject);

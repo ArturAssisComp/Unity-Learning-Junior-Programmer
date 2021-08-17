@@ -21,12 +21,12 @@ public class Boss :  Enemy
     private float minScale  = 0.5f;
     private float maxMass   = 500f;
     private float minMass   = 50f;
-    private float maxPower  = 500f;
+    private float maxPower  = 700f;
     private float minPower  = 400f;
     private float collisionDamageTaken = 1f;
-    private float repelentForce = 10f;
+    private float repelentForce = 15f;
     private float currentHealth;
-    private float attackingPeriod = 15f;
+    private float attackingPeriod = 10f;
 
     //Attributes for special attacks:
     //SMASH_ATTACK:
@@ -38,6 +38,11 @@ public class Boss :  Enemy
     private Vector3 awayDirection;
 
     //MACHINE_GUN:
+    public GameObject bossProjetile;
+    private Vector3   shootingDirection;
+    private float machineGunCountdownTime = 5f;
+    private float shootingPeriodMax = 0.5f;
+    private float shootingPeriodMin = 0.1f;
 
     //SPAWN_ENEMY:
     public GameObject[] enemy;
@@ -117,7 +122,7 @@ public class Boss :  Enemy
 
         if(currentProportion > 0)
         {
-            switch (3)//(Random.Range((int) AttackType.NOTHING, (int) AttackType.SPAWN_ENEMY + 1))
+            switch (2)//(Random.Range((int) AttackType.NOTHING, (int) AttackType.SPAWN_ENEMY + 1))
             {
                 case (int) AttackType.NOTHING:
                     break;
@@ -130,7 +135,9 @@ public class Boss :  Enemy
                     this.isSmashAttackActive = true;
                     break;
                 case (int) AttackType.MACHINE_GUN:
-                    //Implement
+                    StartCoroutine(this.MachineGunCountdownRoutine());
+                    float repeatPeriod = currentProportion * (this.shootingPeriodMax - this.shootingPeriodMin) + this.shootingPeriodMin;
+                    InvokeRepeating("ShootPlayer", 0.01f, repeatPeriod); 
                     break;
                 case (int) AttackType.SPAWN_ENEMY:
                     //Check if there are still enemies:
@@ -224,5 +231,19 @@ public class Boss :  Enemy
         return new Vector3(xPosition, 0,  zPosition);
     }
 
+    IEnumerator MachineGunCountdownRoutine()
+    {
+        yield return new WaitForSeconds(this.machineGunCountdownTime);
+        CancelInvoke("ShootPlayer");
+    }
+    private void ShootPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+        {
+            this.shootingDirection = player.transform.position - this.transform.position;
+            Instantiate(this.bossProjetile, this.transform.position, Quaternion.FromToRotation(this.bossProjetile.transform.forward, this.shootingDirection));
+        }
+    }
 
 }
