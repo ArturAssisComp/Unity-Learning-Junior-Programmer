@@ -18,15 +18,16 @@ public class Boss :  Enemy
     //Boss' attributes:
     private float maxHealth = 100f;
     private float maxScale  = 10f;
-    private float minScale  = 0.5f;
+    private float minScale  = 2f;
     private float maxMass   = 500f;
     private float minMass   = 50f;
-    private float maxPower  = 700f;
-    private float minPower  = 400f;
+    private float maxPower  = 3000f;
+    private float minPower  = 500f;
     private float collisionDamageTaken = 1f;
-    private float repelentForce = 15f;
+    private float repelentForce = 25f;
     private float currentHealth;
     private float attackingPeriod = 10f;
+    public Renderer bossRenderer;
 
     //Attributes for special attacks:
     //SMASH_ATTACK:
@@ -67,6 +68,7 @@ public class Boss :  Enemy
         //Start invoking the attacking method from the boss:
         InvokeRepeating("GenericSpecialAttack", 2 * attackingPeriod, attackingPeriod);
 
+
     }
 
     public void AddToHealth(float amount)
@@ -100,7 +102,9 @@ public class Boss :  Enemy
     /// </summary>
     private void UpdateAttributes()
     {
+        const float maxColorValue = 1f;
         float currentProportion = this.currentHealth / this.maxHealth;
+        float newRedAndGreen;
 
         //Update scale:
         this.transform.localScale = Vector3.one * ((this.maxScale - this.minScale) * currentProportion + this.minScale);
@@ -110,6 +114,10 @@ public class Boss :  Enemy
 
         //Update the power:
         this.power = (this.maxPower - this.minPower) * currentProportion + this.minPower;
+
+        //Update the color:
+        newRedAndGreen = maxColorValue * currentProportion;
+        this.bossRenderer.material.color = new Color(maxColorValue, newRedAndGreen, newRedAndGreen, maxColorValue);
 
     }
 
@@ -122,7 +130,7 @@ public class Boss :  Enemy
 
         if(currentProportion > 0)
         {
-            switch (2)//(Random.Range((int) AttackType.NOTHING, (int) AttackType.SPAWN_ENEMY + 1))
+            switch (Random.Range((int) AttackType.NOTHING, (int) AttackType.SPAWN_ENEMY + 1))
             {
                 case (int) AttackType.NOTHING:
                     break;
