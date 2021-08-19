@@ -26,15 +26,16 @@ public class PlayerController : MonoBehaviour
     //Attributes for general power ups:
     private powerUp powerUpStatus = powerUp.NONE;
     private GameObject[] enemies;
+    private float bossModifier = 100f;
 
     //Attributes for smash atack power up:
-    private float smashAttackForce         = 1000f;
+    private float smashAttackForce         = 5000f;
     private float smashAttackJumpForce     = 30f;
     private float smashAttackGravityFactor = 10f;
     private Vector3 awayDirection;
 
     //Attributes for repelent power up:
-    private float repelentForce = 25f;
+    private float repelentForce = 35f;
 
     //Attributes for machine gun shooting:
     public GameObject projetile;
@@ -131,6 +132,12 @@ public class PlayerController : MonoBehaviour
             this.awayDirection = item.transform.position - this.transform.position;
             item.GetComponent<Rigidbody>().AddForce(this.awayDirection.normalized * this.smashAttackForce / Mathf.Pow(this.awayDirection.magnitude, 2), ForceMode.Impulse);
         }
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        if(boss != null)
+        {
+            this.awayDirection = boss.transform.position - this.transform.position;
+            boss.GetComponent<Rigidbody>().AddForce(this.awayDirection.normalized * this.smashAttackForce * this.bossModifier / Mathf.Pow(this.awayDirection.magnitude, 2), ForceMode.Impulse);
+        }
     }
 
     IEnumerator PowerUpCountdownRoutine(string type)
@@ -148,12 +155,22 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Check if the player collides with enemy while with power up:
-        if (collision.gameObject.CompareTag("Enemy") && this.powerUpStatus == powerUp.REPELENT)
+        if(this.powerUpStatus == powerUp.REPELENT)
         {
-            Vector3 awayDirection = (collision.gameObject.transform.position - this.transform.position).normalized;
-            Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                Vector3 awayDirection = (collision.gameObject.transform.position - this.transform.position).normalized;
+                Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();
 
-            enemyRigidBody.AddForce(awayDirection * this.repelentForce, ForceMode.Impulse);
+                enemyRigidBody.AddForce(awayDirection * this.repelentForce, ForceMode.Impulse);
+            }
+            else if (collision.gameObject.CompareTag("Boss"))
+            {
+                Vector3 awayDirection = (collision.gameObject.transform.position - this.transform.position).normalized;
+                Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();
+
+                enemyRigidBody.AddForce(awayDirection * this.repelentForce * this.bossModifier, ForceMode.Impulse);
+            }
         }
         else if (collision.gameObject.CompareTag("Floor") && this.powerUpStatus == powerUp.SMASH_ATTACK)
         {

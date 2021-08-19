@@ -6,11 +6,13 @@ public class SpawnManager : MonoBehaviour
 {
     //Attributes:
     public GameObject[] enemy;
+    public GameObject boss;
     public GameObject[] powerUp;
     private float waveLevel = 1;
     private float deltaWaveLevel = 0.2f;
     private int enemiesPerWave = 1;
     private int currentNumberOfEnemies = 0;
+    private int firstBossLevel = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,7 @@ public class SpawnManager : MonoBehaviour
     {
 
         //Check if there are still enemies:
-        this.currentNumberOfEnemies = FindObjectsOfType<Enemy>().Length;
+        this.currentNumberOfEnemies = FindObjectsOfType<Enemy>().Length + FindObjectsOfType<Boss>().Length;
         
         if(this.currentNumberOfEnemies == 0)
         {
@@ -33,8 +35,13 @@ public class SpawnManager : MonoBehaviour
             this.waveLevel += this.deltaWaveLevel;
 
             //Spawn enemies and a power up:
-            this.SpawnWave(this.enemiesPerWave);
-            this.SpawnPowerUp(1);
+            if (this.enemiesPerWave == this.firstBossLevel)
+                this.SpawnBoss();
+            else
+            {
+                this.SpawnWave(this.enemiesPerWave);
+                this.SpawnPowerUp(1);
+            }
         }
     }
 
@@ -55,6 +62,11 @@ public class SpawnManager : MonoBehaviour
 
             Instantiate(this.enemy[enemyIndex], GenerateSpawnPosition(), this.enemy[enemyIndex].transform.rotation);
         }
+    }
+
+    private void SpawnBoss()
+    {
+            Instantiate(this.boss, this.boss.transform.position, this.boss.transform.rotation);
     }
 
     private void SpawnPowerUp(int numberOfPowerUps)

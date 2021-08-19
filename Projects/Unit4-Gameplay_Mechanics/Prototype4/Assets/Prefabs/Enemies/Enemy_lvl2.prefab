@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 20
+  enemyRigidbody: {fileID: 0}
 --- !u!1001 &1342046932446320107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,7 +105,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c90d31bc6ef3a5942841f337acae0101, type: 2}
+      objectReference: {fileID: 2100000, guid: 124ab72f71a01ef4c9aa454d711e3dbd, type: 2}
     - target: {fileID: 6657744681747570009, guid: 039a691575b81f545a30f7dfc1c7c75e,
         type: 3}
       propertyPath: m_Mass

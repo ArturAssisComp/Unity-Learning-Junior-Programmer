@@ -21,13 +21,14 @@ public class Boss :  Enemy
     private float minScale  = 2f;
     private float maxMass   = 500f;
     private float minMass   = 50f;
-    private float maxPower  = 3000f;
+    private float maxPower  = 5000f;
     private float minPower  = 500f;
-    private float collisionDamageTaken = 1f;
-    private float repelentForce = 25f;
+    private float collisionDamageTaken = 17f;
+    private float repelentForce = 20f;
     private float currentHealth;
     private float attackingPeriod = 10f;
     public Renderer bossRenderer;
+    public HealthBar bossHealthBar;
 
     //Attributes for special attacks:
     //SMASH_ATTACK:
@@ -60,8 +61,7 @@ public class Boss :  Enemy
     public override void Start()
     {
         base.Start();
-
-
+        
         //Start the health to max:
         this.SetHealth(this.maxHealth);
 
@@ -80,8 +80,11 @@ public class Boss :  Enemy
         {
             //The boss died.
             StopAllCoroutines();
-            Destroy(this.gameObject);
+            Destroy(this.transform.parent.gameObject);
         }
+
+        //Update the health bar:
+        this.bossHealthBar.setHealth(this.currentHealth);
 
         //Update other attributes:
         this.UpdateAttributes();
@@ -90,6 +93,10 @@ public class Boss :  Enemy
     private void SetHealth(float amount)
     {
         this.currentHealth = amount;
+
+        //Update the health bar:
+        this.bossHealthBar.setMaxHealth(amount);
+
 
         //Update other attributes:
         this.UpdateAttributes();
@@ -104,7 +111,7 @@ public class Boss :  Enemy
     {
         const float maxColorValue = 1f;
         float currentProportion = this.currentHealth / this.maxHealth;
-        float newRedAndGreen;
+        float newBlue, newGreen;
 
         //Update scale:
         this.transform.localScale = Vector3.one * ((this.maxScale - this.minScale) * currentProportion + this.minScale);
@@ -116,8 +123,8 @@ public class Boss :  Enemy
         this.power = (this.maxPower - this.minPower) * currentProportion + this.minPower;
 
         //Update the color:
-        newRedAndGreen = maxColorValue * currentProportion;
-        this.bossRenderer.material.color = new Color(maxColorValue, newRedAndGreen, newRedAndGreen, maxColorValue);
+        newGreen = newBlue   = maxColorValue * currentProportion;
+        this.bossRenderer.material.color = new Color(maxColorValue, newBlue, newGreen, maxColorValue);
 
     }
 
