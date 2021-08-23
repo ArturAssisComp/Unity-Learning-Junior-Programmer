@@ -5,9 +5,12 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     //Attributes:
+    public int scoreValue;
+    public ParticleSystem explosionEffect;
     private float minForce = 8f,  minTorque = -10f, minHorizontalPosition = -4f;
     private float maxForce = 15f, maxTorque = 10f,  maxHorizontalPosition =  4f;
     private float initialVerticalPosition = -1f;
+    private GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -15,6 +18,9 @@ public class Target : MonoBehaviour
     {
         //Get the rigid body:
         Rigidbody rigidbody = this.gameObject.GetComponent<Rigidbody>();
+
+        //Get gameManager:
+        this.gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //Apply the initial conditions:
         this.transform.position = new Vector3(this.GetRandomHorizontalPosition(), this.initialVerticalPosition);
@@ -24,6 +30,21 @@ public class Target : MonoBehaviour
         
     }
 
+
+    private void OnMouseDown()
+    {
+        Destroy(this.gameObject);
+        Instantiate(this.explosionEffect, this.transform.position, this.transform.rotation);
+        this.gameManager.AddToScore(this.scoreValue);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Equals("Sensor"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private float GetRandomHorizontalPosition()
     {

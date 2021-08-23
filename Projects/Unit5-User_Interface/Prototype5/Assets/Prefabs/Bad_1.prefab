@@ -121,9 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9adc09dfb9b3de4588187a3c1eb882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minForce: 15
-  minTorque: 0
-  minHorizontalPosition: -4
-  maxForce: 15
-  maxTorque: 0
-  maxHorizontalPosition: 4
+  scoreValue: -20
+  explosionEffect: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb,
+    type: 3}
