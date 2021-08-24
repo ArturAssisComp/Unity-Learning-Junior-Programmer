@@ -33,15 +33,22 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(this.gameObject);
-        Instantiate(this.explosionEffect, this.transform.position, this.transform.rotation);
-        this.gameManager.AddToScore(this.scoreValue);
+        if(this.gameManager.IsGameActive)
+        {
+            Destroy(this.gameObject);
+            Instantiate(this.explosionEffect, this.transform.position, this.transform.rotation);
+            this.gameManager.AddToScore(this.scoreValue);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Equals("Sensor"))
         {
+            if(this.CompareTag("GoodTarget"))
+            {
+                this.gameManager.GameOver();
+            }
             Destroy(this.gameObject);
         }
     }
