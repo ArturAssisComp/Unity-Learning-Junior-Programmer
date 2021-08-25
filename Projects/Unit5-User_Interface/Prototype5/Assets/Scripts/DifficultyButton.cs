@@ -7,10 +7,17 @@ public class DifficultyButton : MonoBehaviour
 {
     //Attributes:
     private Button button;
+    private GameManager gameManager;
+    public int difficulty;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Get the components:
         this.button = this.gameObject.GetComponent<Button>();
+        this.gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+
         this.button.onClick.AddListener(this.SetDifficulty);
     }
 
@@ -22,6 +29,6 @@ public class DifficultyButton : MonoBehaviour
 
     private void SetDifficulty()
     {
-        Debug.Log(this.gameObject.name + " was clicked!");
+        this.gameManager.StartGame(this.difficulty);
     }
 }
