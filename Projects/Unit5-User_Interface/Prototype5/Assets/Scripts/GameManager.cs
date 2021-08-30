@@ -10,18 +10,23 @@ public class GameManager : MonoBehaviour
     //Attributes:
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public GameObject titleScreen;
+    public GameObject mainCamera;
+    public Slider volumeSlider;
     private float spawnPeriod;
     private float maxSpawnPeriod = 2f;
     private int score = 0;
+    private int lives = 3;
     private bool isGameActive = true;
     public bool IsGameActive { get{ return this.isGameActive; } }
 
     // Start is called before the first frame update
     void Start()
     {
+        this.volumeSlider.onValueChanged.AddListener(delegate { this.ChangeVolume(); });
     }
 
     // Update is called once per frame
@@ -47,17 +52,30 @@ public class GameManager : MonoBehaviour
         this.scoreText.text = "Score: " + this.score;
     }
 
-    public void GameOver()
+    private void GameOver()
     {
         this.isGameActive = false;
         this.gameOverText.gameObject.SetActive(true);
         this.restartButton.gameObject.SetActive(true);
     }
 
+    public void LoseLife()
+    {
+        if(this.IsGameActive)
+        {
+            this.lives--;
+            if(this.lives >= 0)
+                this.livesText.text = "Lives: " + this.lives;
+        }
+        if (this.IsGameActive && this.lives < 0)
+            this.GameOver();
+    }
+
     public void RestartGame()
     {
         this.titleScreen.gameObject.SetActive(true);
         this.scoreText.gameObject.SetActive(false);
+        this.livesText.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
@@ -68,8 +86,16 @@ public class GameManager : MonoBehaviour
 
         this.titleScreen.gameObject.SetActive(false);
         this.scoreText.gameObject.SetActive(true);
+        this.livesText.gameObject.SetActive(true);
         this.spawnPeriod = this.maxSpawnPeriod / difficulty;
         StartCoroutine(this.SpawnTargets());
         this.AddToScore(0);
+        this.livesText.text = "Lives: " + this.lives;
+    }
+
+
+    public void ChangeVolume()
+    {
+        this.mainCamera.GetComponent<AudioSource>().volume = this.volumeSlider.value;
     }
 }

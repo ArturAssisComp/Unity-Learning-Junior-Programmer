@@ -47,7 +47,7 @@ public class Target : MonoBehaviour
         {
             if(this.CompareTag("GoodTarget"))
             {
-                this.gameManager.GameOver();
+                this.gameManager.LoseLife();
             }
             Destroy(this.gameObject);
         }
