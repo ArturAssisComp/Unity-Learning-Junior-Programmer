@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public GameObject titleScreen;
+    public GameObject pauseScreen;
     public GameObject mainCamera;
     public Slider volumeSlider;
     private float spawnPeriod;
     private float maxSpawnPeriod = 2f;
     private int score = 0;
     private int lives = 3;
-    private bool isGameActive = true;
+    public bool isGamePaused = false;
+    private  bool isGameActive = false;
     public bool IsGameActive { get{ return this.isGameActive; } }
 
     // Start is called before the first frame update
@@ -32,6 +34,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P) && this.IsGameActive)
+        {
+            if (this.isGamePaused)
+                this.ResumeGame();
+            else
+                this.PauseGame();
+        }
         
     }
 
@@ -97,5 +106,19 @@ public class GameManager : MonoBehaviour
     public void ChangeVolume()
     {
         this.mainCamera.GetComponent<AudioSource>().volume = this.volumeSlider.value;
+    }
+
+    private void PauseGame()
+    {
+        this.isGamePaused = true;
+        Time.timeScale = 0;
+        this.pauseScreen.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        this.isGamePaused = false;
+        Time.timeScale = 1;
+        this.pauseScreen.SetActive(false);
     }
 }
